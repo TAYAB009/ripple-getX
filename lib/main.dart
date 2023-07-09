@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ripple_x/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Bottom Sheets',
+      title: 'Navigation',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -23,39 +24,25 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
-                  onPressed: () {
-                    Get.bottomSheet(
-                      Wrap(
-                        children: [
-                          ListTile(
-                            leading: const Icon(Icons.wb_sunny_outlined),
-                            title: Text('Light mode'),
-                            onTap: () {
-                              Get.changeTheme(ThemeData.light());
-                            },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.wb_sunny),
-                            title: Text('Dark mode'),
-                            onTap: () {
-                              Get.changeTheme(ThemeData.dark());
-                            },
-                          )
-                        ],
-                      ),
-                      barrierColor: Colors.pink,
-                      backgroundColor: Colors.yellow,
-                      isDismissible: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3.3),
-                        side: BorderSide(
-                          color: Colors.blue,
-                        ),
-                      ),
-                      enableDrag: false,
-                    );
-                  },
-                  child: const Text('Bottom Sheet'))
+                onPressed: () async {
+                  var data = await Get.to(Home(),
+                      arguments: 'Data from main.dart file');
+                  print(data);
+                  // Get.to(
+                  //   // const Home(),
+                  //   // Get.off(Home()),
+                  //   // Get.offAll(Home()),
+                  //   Get.to(Home(), arguments: 'This data from main.dart file'),
+
+                  //   fullscreenDialog: true,
+                  //   transition: Transition.zoom,
+                  //   duration: const Duration(milliseconds: 300),
+                  //   // curve: Curves.bounceInOut,
+                  // );
+                  // Dialog.fullscreen();
+                },
+                child: const Text('Go To Home'),
+              )
             ],
           ),
         ),
